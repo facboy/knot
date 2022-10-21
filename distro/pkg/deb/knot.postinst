@@ -6,9 +6,14 @@ if [ "$1" = "configure" ]; then
         adduser --quiet --system --group --no-create-home --home /var/lib/knot knot
     fi
 
-    dpkg-statoverride --list /var/lib/knot > /dev/null || dpkg-statoverride --update --add knot knot 0755 /var/lib/knot
-    dpkg-statoverride --list /etc/knot/knot.conf > /dev/null || dpkg-statoverride --update --add knot knot 0640 /etc/knot/knot.conf
-    dpkg-statoverride --list /etc/knot > /dev/null || dpkg-statoverride --update --add knot knot 0750 /etc/knot
+    dpkg-statoverride --list /etc/knot > /dev/null || dpkg-statoverride --update --add knot knot 0770 /etc/knot
+    dpkg-statoverride --list /etc/knot/knot.conf > /dev/null || dpkg-statoverride --update --add knot knot 0660 /etc/knot/knot.conf
+
+    state_dir=/var/lib/knot
+    dpkg-statoverride --list $state_dir &> /dev/null || dpkg-statoverride --update --add knot knot 0770 $state_dir
+    for db_name in "catalog" "confdb" "journal" "keys" "timers"; do
+        dpkg-statoverride --list $state_dir/$db_name &> /dev/null || dpkg-statoverride --update --add knot knot 0770 $state_dir/$db_name
+    done
 fi
 
 #DEBHELPER#
