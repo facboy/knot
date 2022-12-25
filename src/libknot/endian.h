@@ -46,6 +46,18 @@
 #       define htole16(x) OSSwapHostToLittleInt16(x)
 #       define htole32(x) OSSwapHostToLittleInt32(x)
 #       define htole64(x) OSSwapHostToLittleInt64(x)
+#elif defined(__CYGWIN__)
+#	include <endian.h>
+#elif defined(_UCRT)
+#	if __BYTE_ORDER == __LITTLE_ENDIAN
+#		define htobe16(x) _byteswap_ushort(x)
+#		define htobe32(x) _byteswap_ulong (x)
+#		define htobe64(x) _byteswap_uint64(x)
+
+#		define be16toh(x) _byteswap_ushort(x)
+#		define be32toh(x) _byteswap_ulong(x)
+#		define be64toh(x) _byteswap_uint64(x)
+#	endif /*__BYTE_ORDER == __LITTLE_ENDIAN*/
 #endif
 
 /*! @} */
