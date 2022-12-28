@@ -559,6 +559,15 @@ AS_IF([test "$enable_daemon" = "yes" -o "$enable_utilities" = "yes"], [
         ], [], [$libedit_deps]
       )
     ])
+    AC_CHECK_HEADER([editline/readline.h], [
+      # workaround for mingw
+      AC_CHECK_LIB([edit], [source_editrc], [
+        with_libedit=yes
+        libedit_CFLAGS=
+        libedit_LIBS="-ledit"
+        ], [], []
+      )
+    ])
   ])
   AS_IF([test "$with_libedit" != "yes"], [
     AC_MSG_ERROR([libedit not found])
