@@ -169,7 +169,11 @@ int open_tmp_file(const char *path, char **tmp_name, FILE **file, mode_t mode)
 		goto open_tmp_failed;
 	}
 
+#ifdef _WIN32
+  if (chmod(tmp_name, mode) != 0) {
+#else
 	if (fchmod(fd, mode) != 0) {
+#endif
 		ret = knot_map_errno();
 		close(fd);
 		unlink(*tmp_name);

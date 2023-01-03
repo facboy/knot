@@ -184,7 +184,9 @@ int conn_pool_get(conn_pool_t *pool,
 
 	if (fd >= 0) {
 		uint8_t unused;
-		int peek = recv(fd, &unused, 1, MSG_PEEK | MSG_DONTWAIT);
+		// TODO fix with windows ioctl stuff
+		// int peek = recv(fd, &unused, 1, MSG_PEEK | MSG_DONTWAIT);
+		int peek = recv(fd, &unused, 1, MSG_PEEK);
 		if (peek >= 0) { // closed or pending data
 			close(fd);
 			fd = -1;

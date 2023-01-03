@@ -16,7 +16,9 @@
 
 #pragma once
 
+#ifndef __MINGW32__
 #include <histedit.h>
+#endif
 
 #include "libknot/mm_ctx.h"
 #include "contrib/qp-trie/trie.h"

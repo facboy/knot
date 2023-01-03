@@ -18,7 +18,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/types.h>   // OpenBSD
+#ifndef _WIN32
 #include <netinet/tcp.h> // TCP_FASTOPEN
+#endif
 #include <netinet/in.h>
 #include <poll.h>
 #include <stdbool.h>

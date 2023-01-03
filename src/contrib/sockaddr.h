@@ -19,7 +19,9 @@
 #include <stdbool.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#ifndef _WIN32
 #include <sys/un.h>
+#endif
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdint.h>
@@ -31,7 +33,12 @@
 
 /* Address string "address[@port]" maximum length. */
 #define SOCKADDR_STRLEN_EXT (1 + 6) /* '@', 5 digits number, \0 */
+#ifdef _WIN32
+// Windows doesn't support domain sockets so assume max length is INET6
+#define SOCKADDR_STRLEN (INET6_ADDRSTRLEN + SOCKADDR_STRLEN_EXT)
+#else
 #define SOCKADDR_STRLEN (sizeof(struct sockaddr_un) + SOCKADDR_STRLEN_EXT)
+#endif
 
 /*!
  * \brief Calculate current structure length based on address family.
