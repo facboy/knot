@@ -1,5 +1,5 @@
-ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = src tests tests-fuzz python samples distro doc
+ACLOCAL_AMFLAGS = -I m4 -I gl/m4
+SUBDIRS = gl src tests tests-fuzz python samples distro doc
 
 EXTRA_DIST = README.md
 

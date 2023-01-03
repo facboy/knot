@@ -1,5 +1,6 @@
 AM_CPPFLAGS = \
 	-include $(top_builddir)/src/config.h	\
+	-I ${top_builddir}/gl \
 	-DCONFIG_DIR='"${config_dir}"'		\
 	-DSTORAGE_DIR='"${storage_dir}"'	\
 	-DRUN_DIR='"${run_dir}"'		\

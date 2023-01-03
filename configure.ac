@@ -40,6 +40,7 @@ AC_SUBST([RELEASE_DATE], $release_date)
 # Set compiler compatibility flags
 AC_PROG_CC
 AC_PROG_CPP_WERROR
+gl_EARLY
 
 # Set default CFLAGS
 CFLAGS="$CFLAGS -Wall -Wshadow -Werror=format-security -Werror=implicit -Werror=attributes -Wstrict-prototypes"
@@ -130,6 +131,8 @@ AM_CONDITIONAL([HAVE_LIBUTILS], test "$enable_utilities" != "no" -o \
 ######################
 # Generic dependencies
 ######################
+
+gl_INIT
 
 AC_ARG_ENABLE([fastparser],
     AS_HELP_STRING([--disable-fastparser], [Disable use of fast zone parser]),
@@ -867,6 +870,7 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  src/libknot/xdp/Makefile
                  src/knot/modules/static_modules.h
+                 gl/Makefile
                  ])
 
 AC_CONFIG_FILES([doc/modules.rst],
