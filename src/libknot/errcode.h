@@ -49,7 +49,9 @@ enum knot_error {
 	KNOT_ENETRESET     = -ENETRESET,
 	KNOT_EHOSTUNREACH  = -EHOSTUNREACH,
 	KNOT_ENETUNREACH   = -ENETUNREACH,
+#ifndef _UCRT
 	KNOT_EHOSTDOWN     = -EHOSTDOWN,
+#endif	
 	KNOT_ENETDOWN      = -ENETDOWN,
 	KNOT_EADDRINUSE    = -EADDRINUSE,
 	KNOT_ENOENT        = -ENOENT,
@@ -213,7 +215,9 @@ inline static int knot_map_errno_code_def(int code, int dflt_error)
 		ERR_ITEM(ENETRESET),
 		ERR_ITEM(EHOSTUNREACH),
 		ERR_ITEM(ENETUNREACH),
+#ifndef _UCRT		
 		ERR_ITEM(EHOSTDOWN),
+#endif		
 		ERR_ITEM(ENETDOWN),
 		ERR_ITEM(EADDRINUSE),
 		ERR_ITEM(ENOENT),

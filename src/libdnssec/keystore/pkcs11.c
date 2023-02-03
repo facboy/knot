@@ -27,6 +27,10 @@
 #include "libdnssec/pem.h"
 #include "libdnssec/shared/shared.h"
 
+#ifdef _UCRT
+#include "libdnssec/win_compat.h"
+#endif
+
 #ifdef ENABLE_PKCS11
 
 struct pkcs11_ctx {
