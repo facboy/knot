@@ -31,10 +31,6 @@
 #include "libdnssec/shared/shared.h"
 #include "libdnssec/shared/keyid_gnutls.h"
 
-#ifdef _UCRT
-#include "libdnssec/win_compat.h"
-#endif
-
 #define DIR_INIT_MODE 0750
 
 /*!
